@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grannkollen: Integritetspolicy</title>
+<meta name="description" content="Grannkollen är ett webbläsartillägg som visar områdesdata direkt på svenska bostadsannonser. Inga konton, ingen spårning." />
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --bg-soft: #f7f9f7;
+    --fg: #14171a;
+    --muted: #6b7280;
+    --border: #e7eae7;
+    --brand: #15803d;
+    --brand-dark: #0f5c2c;
+    --brand-bg: #eefbf1;
+    --card: #ffffff;
+    --shadow: 0 1px 2px rgba(16, 24, 16, 0.04), 0 8px 24px rgba(16, 24, 16, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0b0d0c;
+      --bg-soft: #101312;
+      --fg: #f2f4f2;
+      --muted: #9aa39c;
+      --border: #232826;
+      --brand: #4ade80;
+      --brand-dark: #86efac;
+      --brand-bg: #12291b;
+      --card: #141712;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 4.5rem 0 3rem;
+  }
+  .hero img {
+    width: 84px;
+    height: 84px;
+    border-radius: 20px;
+  }
+  .hero h1 {
+    margin: 1.25rem 0 0.4rem;
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .hero .tagline {
+    margin: 0;
+    color: var(--brand);
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .hero .pitch {
+    max-width: 42rem;
+    margin: 1.25rem auto 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+  }
+
+  /* Feature chips */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1.75rem 0 0;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--brand-bg);
+    color: var(--brand-dark);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  /* Browser support */
+  .browsers-block {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 1.75rem auto 0;
+    padding: 1rem 1.5rem 1.15rem;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+  }
+  .browsers-label {
+    color: var(--muted);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+  }
+  .browsers-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.45rem;
+  }
+  .browser-chip {
+    display: inline-flex;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    border-radius: 999px;
+    padding: 0.32rem 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .browsers-note {
+    color: var(--muted);
+    font-size: 0.76rem;
+    margin: 0;
+  }
+
+  /* CTA buttons */
+  .cta {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  }
+  .btn img { height: 18px; width: auto; }
+  .btn-primary {
+    background: linear-gradient(180deg, #4ade80, #22c55e);
+    color: #06280f;
+    border-radius: 999px;
+    box-shadow: 0 1px 2px rgba(6, 40, 15, 0.15), 0 6px 18px rgba(34, 197, 94, 0.35);
+  }
+  .btn-primary:hover {
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(6, 40, 15, 0.2), 0 10px 24px rgba(34, 197, 94, 0.45);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .btn:hover { filter: brightness(1.05); }
+
+  .btn-coffee {
+    background: linear-gradient(180deg, #ffe270, #ffd23f);
+    color: #3d2c00;
+    border-radius: 999px;
+    box-shadow: 0 1px 2px rgba(120, 90, 0, 0.15), 0 6px 16px rgba(255, 200, 0, 0.25);
+  }
+  .btn-coffee:hover {
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(120, 90, 0, 0.2), 0 10px 22px rgba(255, 200, 0, 0.35);
+  }
+  .btn-coffee:active { transform: translateY(0); }
+
+  /* Section divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3.5rem 0;
+  }
+
+  /* Policy document */
+  .doc-heading {
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+  .doc-heading h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .doc-heading p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 0.35rem 0 2.5rem;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 2rem 2.25rem;
+  }
+  .card section + section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .card h3 {
+    font-size: 1.02rem;
+    margin: 0 0 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .card p { margin: 0 0 0.75rem; color: var(--fg); }
+  .card p:last-child { margin-bottom: 0; }
+
+  dl.item-list { margin: 0.75rem 0 0; }
+  dl.item-list > div + div { margin-top: 1rem; }
+  dl.item-list dt {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  dl.item-list dd {
+    margin: 0.15rem 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  code {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.1em 0.4em;
+    font-size: 0.9em;
+  }
+  a { color: var(--brand-dark); }
+
+  footer {
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <img src="logo.png" alt="Grannkollen" />
+      <h1>Grannkollen</h1>
+      <p class="tagline">Se mer än bara bostaden.</p>
+      <p class="pitch">
+        Ett webbläsartillägg som visar områdesdata direkt på bostadsannonser
+        hos svenska bostadssajter. Inga konton, ingen spårning, ingen reklam.
+      </p>
+
+      <div class="chips">
+        <span class="chip">🏡 Områdespoäng</span>
+        <span class="chip">🛡️ Trygghetspoäng</span>
+        <span class="chip">👨‍👩‍👧 Familjepoäng</span>
+        <span class="chip">📍 Närliggande platser</span>
+      </div>
+
+      <div class="browsers-block">
+        <span class="browsers-label">Fungerar med</span>
+        <div class="browsers-row">
+          <span class="browser-chip">Chrome</span>
+          <span class="browser-chip">Edge</span>
+          <span class="browser-chip">Brave</span>
+          <span class="browser-chip">Opera</span>
+          <span class="browser-chip">Vivaldi</span>
+          <span class="browser-chip">Arc</span>
+        </div>
+        <p class="browsers-note">och alla andra webbläsare byggda på Chromium</p>
+      </div>
+
+      <div class="cta">
+        <!--
+          Lägg till Chrome Web Store-länken här så fort tillägget är
+          publicerat:
+          <a href="https://chromewebstore.google.com/detail/<EXTENSION_ID>" class="btn btn-primary">Hämta i Chrome Web Store</a>
+        -->
+        <a href="https://buymeacoffee.com/adde" class="btn btn-coffee">
+          <img src="buymeacoffee.png" alt="" />
+          Köp mig en kopp kaffe
+        </a>
+      </div>
+    </header>
+
+    <hr class="divider" />
+
+    <div class="doc-heading">
+      <h2>Integritetspolicy</h2>
+      <p>Senast uppdaterad: 2026-08-21</p>
+    </div>
+
+    <div class="card">
+      <section>
+        <h3>Vilken data samlar Grannkollen in?</h3>
+        <p>
+          <strong>Ingen.</strong> Grannkollen har inga användarkonton, ingen
+          inloggning, inga cookies och ingen spårning eller analys av dig
+          som person. Vi samlar inte in, lagrar eller säljer någon personlig
+          information.
+        </p>
+      </section>
+
+      <section>
+        <h3>Vilken data skickas, och till vem?</h3>
+        <p>
+          När du besöker en bostadsannons på en av de sajter tillägget
+          stöder läser Grannkollen adressen/koordinaterna som redan finns
+          synliga på sidan, samma information som visas för alla besökare,
+          och skickar den vidare till ett fåtal öppna, tredjeparts-
+          datakällor för att hämta områdesinformation:
+        </p>
+        <dl class="item-list">
+          <div>
+            <dt>OpenStreetMap</dt>
+            <dd>Geokodning och närliggande platser (skolor, affärer, parker m.m.)</dd>
+          </div>
+          <div>
+            <dt>Kolada (Sveriges Kommuner och Regioner)</dt>
+            <dd>Kommunal brottsstatistik och befolkningstäthet</dd>
+          </div>
+        </dl>
+        <p style="margin-top: 1.25rem;">
+          Dessa anrop innehåller endast den adress eller de koordinater som
+          redan är offentligt synliga på sidan du besöker. De innehåller
+          aldrig ditt namn, din IP-adress utöver vad som naturligt följer
+          med vilket HTTP-anrop som helst, ditt sökbeteende över tid, eller
+          någon annan identifierande information om dig. Grannkollen har
+          inget sätt att koppla dessa anrop till dig som individ.
+        </p>
+      </section>
+
+      <section>
+        <h3>Var lagras data?</h3>
+        <p>
+          Svaren från datakällorna ovan mellanlagras (cachas) lokalt i din
+          egen webbläsare (IndexedDB) för att göra tillägget snabbare och
+          minska antalet nätverksanrop. Denna cache lämnar aldrig din
+          dator. Dina inställningar, till exempel vilka sektioner som
+          visas, sparas också lokalt i webbläsarens
+          <code>storage.local</code>, inte på någon server vi kontrollerar.
+        </p>
+      </section>
+
+      <section>
+        <h3>Delar vi data med tredje part?</h3>
+        <p>
+          Nej, förutom de öppna datakällor som beskrivs ovan, vilka är
+          nödvändiga för tilläggets kärnfunktion: att visa områdesdata. Vi
+          använder ingen analys, annonsering eller spårning av något slag.
+        </p>
+      </section>
+
+      <section>
+        <h3>Behörigheter tillägget begär</h3>
+        <dl class="item-list">
+          <div>
+            <dt>storage</dt>
+            <dd>För att spara dina inställningar lokalt i webbläsaren.</dd>
+          </div>
+          <div>
+            <dt>Ett fåtal namngivna bostadssajter (t.ex. hemnet.se, booli.se)</dt>
+            <dd>
+              Enbart för att kunna läsa av adressen på en bostadsannons och
+              visa Grannkollens panel där. Tillägget har inte åtkomst till
+              några andra webbplatser.
+            </dd>
+          </div>
+          <div>
+            <dt>Ett fåtal namngivna kartdata-API:er (OpenStreetMap)</dt>
+            <dd>
+              Enbart för att hämta områdesdata (skolor, affärer, parker
+              m.m.) för adressen du tittar på. Tillägget skickar aldrig
+              data till dessa API:er utöver koordinater/adress.
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section>
+        <h3>Kontakt</h3>
+        <p>
+          Frågor om denna policy kan skickas till:
+          <a href="mailto:grannkollenapp@gmail.com">grannkollenapp@gmail.com</a>
+        </p>
+      </section>
+
+      <section>
+        <h3>Ändringar</h3>
+        <p>Om denna policy ändras uppdateras datumet högst upp på sidan.</p>
+      </section>
+    </div>
+
+    <footer>
+      Grannkollen är inte anslutet till eller sponsrat av Hemnet, Booli
+      eller någon annan bostadssajt som nämns ovan.
+    </footer>
+  </div>
+</body>
+</html>
