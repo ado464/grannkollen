@@ -1,0 +1,21 @@
+# Grannkollen
+
+> Grannkollen är ett gratis Chrome-tillägg som visar områdesdata direkt på svenska bostadsannonser: brottsstatistik, skolor, kollektivtrafik och andra närliggande platser.
+
+Grannkollen injicerar en sidopanel med områdesdata på bostadsannonser hos
+Hemnet, Booli, Boneo, HomeQ, Heimstaden, Landskronahem, Brinova,
+Victoriahem, Rikshem, Boplats Syd, Stena Fastigheter och Svenska
+Bostäder. Ingen inloggning eller inställning krävs, panelen visas
+automatiskt när en annons öppnas.
+
+Ingen spårning, inga konton, ingen reklam. Data hämtas från öppna källor
+(OpenStreetMap, Kolada) för adressen som redan är synlig på annonsen och
+cachas lokalt i webbläsaren.
+
+Fungerar i Chrome och alla andra webbläsare byggda på Chromium (Edge,
+Brave, Opera, Vivaldi, Arc).
+
+## Sidor
+
+- [Grannkollen](https://grannkollen.app/): Beskrivning av tillägget, vanliga frågor och fullständig integritetspolicy.
+- [Chrome Web Store-listning](https://chromewebstore.google.com/detail/grannkollen/gljckdjnodcneechhamcibfeicedfmoj): Installera tillägget.

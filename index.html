@@ -7,6 +7,10 @@
 <meta name="description" content="Grannkollen är ett gratis Chrome-tillägg som visar brottsstatistik, skolor och närliggande platser direkt på bostadsannonser hos Hemnet, Booli och ett tiotal andra svenska bostadssajter. Inga konton, ingen spårning." />
 <link rel="canonical" href="https://grannkollen.app/" />
 <link rel="icon" href="logo.png" type="image/png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<meta name="theme-color" content="#15803d" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b0d0c" media="(prefers-color-scheme: dark)" />
+<meta name="robots" content="index, follow" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Grannkollen" />
@@ -41,6 +45,63 @@
     "name": "Adde"
   },
   "installUrl": "https://chromewebstore.google.com/detail/grannkollen/gljckdjnodcneechhamcibfeicedfmoj"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Vad är Grannkollen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Grannkollen är ett gratis webbläsartillägg som visar områdesdata, till exempel brottsstatistik, skolor, kollektivtrafik och andra närliggande platser, direkt i en sidopanel när du tittar på en bostadsannons."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vilka sajter fungerar Grannkollen på?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hemnet, Booli, Boneo, HomeQ, Heimstaden, Landskronahem, Brinova, Victoriahem, Rikshem, Boplats Syd, Stena Fastigheter och Svenska Bostäder."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kostar Grannkollen något?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nej, Grannkollen är helt gratis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Behöver jag skapa ett konto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nej. Grannkollen fungerar direkt utan konto, inloggning eller inställningar. Öppna en bostadsannons på en av de sajter tillägget stöder så dyker panelen upp automatiskt."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vilken data samlar Grannkollen in om mig?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ingen. Grannkollen har inga användarkonton, ingen spårning och ingen analys av dig som person. Adressen som redan är synlig på annonsen används för att hämta områdesdata från öppna källor."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Fungerar Grannkollen i andra webbläsare än Chrome?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, i alla webbläsare byggda på Chromium, till exempel Edge, Brave, Opera, Vivaldi och Arc."
+      }
+    }
+  ]
 }
 </script>
 
@@ -290,6 +351,44 @@
   }
   a { color: var(--brand-dark); }
 
+  /* FAQ */
+  .faq-item + .faq-item {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.98rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+";
+    color: var(--muted);
+    font-weight: 400;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .faq-item[open] summary::after { content: "\2212"; }
+  .faq-item p {
+    margin: 0.6rem 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .faq-item ul {
+    margin: 0.6rem 0 0;
+    padding-left: 1.1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  .faq-item li + li { margin-top: 0.2rem; }
+
   footer {
     margin-top: 3rem;
     text-align: center;
@@ -301,7 +400,7 @@
 <body>
   <div class="wrap">
     <header class="hero">
-      <img src="logo.png" alt="Grannkollen" />
+      <img src="logo.png" alt="Grannkollen" width="128" height="128" />
       <h1>Grannkollen</h1>
       <p class="tagline">Se mer än bara bostaden.</p>
       <p class="pitch">
@@ -335,11 +434,81 @@
           Hämta i Chrome Web Store
         </a>
         <a href="https://buymeacoffee.com/adde" class="btn btn-coffee">
-          <img src="buymeacoffee.png" alt="" />
+          <img src="buymeacoffee.png" alt="" width="884" height="1279" />
           Köp mig en kopp kaffe
         </a>
       </div>
     </header>
+
+    <hr class="divider" />
+
+    <div class="doc-heading">
+      <h2>Vanliga frågor</h2>
+      <p>Kort om vad Grannkollen är och hur det fungerar</p>
+    </div>
+
+    <div class="card">
+      <details class="faq-item" open>
+        <summary>Vad är Grannkollen?</summary>
+        <p>
+          Grannkollen är ett gratis webbläsartillägg som visar
+          områdesdata, till exempel brottsstatistik, skolor,
+          kollektivtrafik och andra närliggande platser, direkt i en
+          sidopanel när du tittar på en bostadsannons.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Vilka sajter fungerar Grannkollen på?</summary>
+        <ul>
+          <li>Hemnet</li>
+          <li>Booli</li>
+          <li>Boneo</li>
+          <li>HomeQ</li>
+          <li>Heimstaden</li>
+          <li>Landskronahem</li>
+          <li>Brinova</li>
+          <li>Victoriahem</li>
+          <li>Rikshem</li>
+          <li>Boplats Syd</li>
+          <li>Stena Fastigheter</li>
+          <li>Svenska Bostäder</li>
+        </ul>
+      </details>
+
+      <details class="faq-item">
+        <summary>Kostar Grannkollen något?</summary>
+        <p>Nej, Grannkollen är helt gratis.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Behöver jag skapa ett konto?</summary>
+        <p>
+          Nej. Grannkollen fungerar direkt utan konto, inloggning eller
+          inställningar. Öppna en bostadsannons på en av sajterna ovan så
+          dyker panelen upp automatiskt.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Vilken data samlar Grannkollen in om mig?</summary>
+        <p>
+          Ingen. Grannkollen har inga användarkonton, ingen spårning och
+          ingen analys av dig som person. Adressen som redan är synlig på
+          annonsen används för att hämta områdesdata från öppna källor.
+          Läs hela integritetspolicyn nedan för alla detaljer.
+        </p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Fungerar Grannkollen i andra webbläsare än Chrome?</summary>
+        <p>
+          Ja, i alla webbläsare byggda på Chromium, till exempel Edge,
+          Brave, Opera, Vivaldi och Arc.
+        </p>
+      </details>
+
+    </div>
 
     <hr class="divider" />
 
