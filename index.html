@@ -90,7 +90,7 @@
       "name": "Vilken data samlar Grannkollen in om mig?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Ingen. Grannkollen har inga användarkonton, ingen spårning och ingen analys av dig som person. Adressen som redan är synlig på annonsen används för att hämta områdesdata från öppna källor."
+        "text": "Grannkollen har ingen egen server, inga användarkonton och ingen spårning eller analys av dig som person. Adressen som redan är synlig på annonsen skickas till öppna datakällor (OpenStreetMap, Kolada) för att hämta områdesdata. Som vid alla webbanrop ser dessa tjänster din IP-adress, men Grannkollen självt samlar inte in, lagrar eller loggar något."
       }
     },
     {
@@ -389,6 +389,101 @@
   }
   .faq-item li + li { margin-top: 0.2rem; }
 
+  .dev-bio-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+  }
+  .dev-bio {
+    width: 100%;
+    max-width: 40rem;
+  }
+  .dev-bio-button {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    list-style: none;
+    width: fit-content;
+    margin: 0 auto;
+  }
+  .dev-bio-button::-webkit-details-marker { display: none; }
+
+  .btn-dev {
+    background: linear-gradient(180deg, #60a5fa, #3b82f6);
+    color: #0b2653;
+    border-radius: 999px;
+    box-shadow: 0 1px 2px rgba(11, 38, 83, 0.15), 0 6px 18px rgba(59, 130, 246, 0.35);
+  }
+  .btn-dev:hover {
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(11, 38, 83, 0.2), 0 10px 24px rgba(59, 130, 246, 0.45);
+  }
+
+  .dev-bio-content {
+    margin-top: 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 1.75rem;
+  }
+  .dev-bio-content p, .dev-bio-content ul {
+    color: var(--fg);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .dev-bio-content ul { padding-left: 1.1rem; }
+  .dev-bio-content li + li { margin-top: 0.35rem; }
+  .dev-bio-content h4 {
+    margin: 1.75rem 0 0.6rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--brand-dark);
+    letter-spacing: -0.01em;
+  }
+  .dev-bio-content h4:first-child { margin-top: 0; }
+
+  .dev-bio-content .trust-panel {
+    margin: 0.75rem 0 1rem;
+    padding: 1.1rem 1.3rem;
+    background: var(--brand-bg);
+    border-radius: 14px;
+  }
+  .dev-bio-content .trust-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .dev-bio-content .trust-panel li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .dev-bio-content .trust-panel li + li { margin-top: 0.5rem; }
+  .dev-bio-content .trust-panel li::before {
+    content: "\2713";
+    color: var(--brand-dark);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .dev-bio-content .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--brand-bg);
+    color: var(--brand-dark);
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    margin-top: 0.4rem;
+  }
+  .dev-bio-content .contact-pill:hover { text-decoration: underline; }
+
   footer {
     margin-top: 3rem;
     text-align: center;
@@ -493,10 +588,13 @@
       <details class="faq-item">
         <summary>Vilken data samlar Grannkollen in om mig?</summary>
         <p>
-          Ingen. Grannkollen har inga användarkonton, ingen spårning och
-          ingen analys av dig som person. Adressen som redan är synlig på
-          annonsen används för att hämta områdesdata från öppna källor.
-          Läs hela integritetspolicyn nedan för alla detaljer.
+          Grannkollen har ingen egen server, inga användarkonton och ingen
+          spårning eller analys av dig som person. Adressen som redan är
+          synlig på annonsen skickas till öppna datakällor (OpenStreetMap,
+          Kolada) för att hämta områdesdata. Som vid alla webbanrop ser
+          dessa tjänster din IP-adress, men Grannkollen självt samlar inte
+          in, lagrar eller loggar något. Läs hela integritetspolicyn nedan
+          för alla detaljer.
         </p>
       </details>
 
@@ -508,6 +606,77 @@
         </p>
       </details>
 
+    </div>
+
+    <hr class="divider" />
+
+    <div class="dev-bio-wrap">
+      <details class="dev-bio">
+        <summary class="btn btn-dev dev-bio-button">👤 Om utvecklaren</summary>
+
+        <div class="dev-bio-content">
+          <h4>Bakgrund</h4>
+          <p>
+            Jag är AddeDev, personen bakom Grannkollen. Jag har jobbat
+            inom IT i över tio år, med tyngdpunkt på drift,
+            infrastruktur och säkerhet:
+          </p>
+          <ul>
+            <li>Byggt och ägt hela infrastrukturlösningar från grunden, inklusive ett eget produktprojekt med trådlös IoT-teknik</li>
+            <li>Infrastructure-as-Code med Ansible och Puppet mot flera virtualiseringsplattformar (VMware, Nutanix, Proxmox)</li>
+            <li>Nätverksadministration, brandväggskonfiguration och säkerhetsövervakning (Zabbix) för hela infrastrukturer</li>
+            <li>CI/CD och Git/GitLab-administration</li>
+            <li>Migrerat produktionssystem mellan operativsystem utan driftstopp</li>
+            <li>Mentorskap för juniora kollegor</li>
+          </ul>
+          <p>
+            Jag har också praktisk erfarenhet av webbutveckling (HTML,
+            JavaScript, PHP, CSS) från tidigare projekt, om än inte i
+            samma djup som mitt huvudspår inom infrastruktur och drift.
+          </p>
+
+          <h4>Varför Grannkollen är byggt som det är</h4>
+          <p>
+            Jag arbetar i grunden inom säkerhetsbranschen, därför är
+            Grannkollen byggd med detta i åtanke:
+          </p>
+          <div class="trust-panel">
+            <ul>
+              <li>Ingen egen server</li>
+              <li>Inga användarkonton</li>
+              <li>Ingen spårning eller analys av dig som person</li>
+              <li>Ingen datainsamling utöver det som är strikt nödvändigt för att visa områdesdata</li>
+            </ul>
+          </div>
+          <p>
+            Tillägget läser bara det som redan är synligt på annonsen
+            du själv valt att besöka, exakt en gång, och skickar det
+            ingenstans utom till de öppna datakällor som krävs för att
+            slå upp området. Du scrapas aldrig som användare. Samma
+            försiktighet jag använder för att skydda infrastruktur i
+            mitt vanliga arbete ligger bakom varje beslut i det här
+            projektet: hellre en enklare produkt som inte samlar in
+            något, än en som gör det "för säkerhets skull".
+          </p>
+
+          <h4>Om AI-verktyg i utvecklingen</h4>
+          <p>
+            Grannkollen byggdes med hjälp av AI-verktyg för att täcka
+            gapet mot mitt huvudspår snabbare, men med samma
+            arbetssätt jag använder i yrkeslivet genom hela processen:
+            verklig testning mot riktiga bostadsannonser, systematisk
+            felsökning tills det faktiskt fungerar, och medvetna
+            tekniska avvägningar.
+          </p>
+
+          <h4>Kontakt</h4>
+          <p>
+            Jag är anonym av personliga skäl, men svarar gärna på
+            frågor om hur produkten fungerar.
+          </p>
+          <a class="contact-pill" href="mailto:info@grannkollen.app">✉️ info@grannkollen.app</a>
+        </div>
+      </details>
     </div>
 
     <hr class="divider" />
@@ -608,7 +777,7 @@
         <h3>Kontakt</h3>
         <p>
           Frågor om denna policy kan skickas till:
-          <a href="mailto:grannkollenapp@gmail.com">grannkollenapp@gmail.com</a>
+          <a href="mailto:info@grannkollen.app">info@grannkollen.app</a>
         </p>
       </section>
 
