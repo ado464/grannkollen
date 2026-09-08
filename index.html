@@ -66,7 +66,7 @@
       "name": "Vilka sajter fungerar Grannkollen på?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Hemnet, Booli, Boneo, HomeQ, Heimstaden, Landskronahem, Brinova, Victoriahem, Rikshem, Boplats Syd, Stena Fastigheter och Svenska Bostäder."
+        "text": "Hemnet, Booli, Boneo, HomeQ, Heimstaden, Landskronahem, Brinova, Victoriahem, Rikshem, Boplats Syd, Stena Fastigheter, Svenska Bostäder och Qasa."
       }
     },
     {
@@ -256,8 +256,10 @@
     border-radius: 10px;
     font-weight: 600;
     font-size: 0.92rem;
+    font-family: inherit;
     text-decoration: none;
     border: 1px solid transparent;
+    cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
   }
   .btn img { height: 18px; width: auto; }
@@ -287,6 +289,34 @@
     box-shadow: 0 2px 4px rgba(120, 90, 0, 0.2), 0 10px 22px rgba(255, 200, 0, 0.35);
   }
   .btn-coffee:active { transform: translateY(0); }
+
+  .cta-secondary { margin-top: 0.75rem; }
+
+  .btn-dev {
+    background: linear-gradient(180deg, #60a5fa, #3b82f6);
+    color: #0b2653;
+    border-radius: 999px;
+    box-shadow: 0 1px 2px rgba(11, 38, 83, 0.15), 0 6px 18px rgba(59, 130, 246, 0.35);
+  }
+  .btn-dev:hover {
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(11, 38, 83, 0.2), 0 10px 24px rgba(59, 130, 246, 0.45);
+  }
+  .btn-dev:active { transform: translateY(0); }
+
+  .btn-changelog {
+    background: linear-gradient(180deg, #c4b5fd, #a78bfa);
+    color: #2e1065;
+    border-radius: 999px;
+    box-shadow: 0 1px 2px rgba(46, 16, 101, 0.15), 0 6px 18px rgba(167, 139, 250, 0.35);
+  }
+  .btn-changelog:hover {
+    filter: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(46, 16, 101, 0.2), 0 10px 24px rgba(167, 139, 250, 0.45);
+  }
+  .btn-changelog:active { transform: translateY(0); }
 
   /* Section divider */
   .divider {
@@ -389,87 +419,86 @@
   }
   .faq-item li + li { margin-top: 0.2rem; }
 
-  .dev-bio-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: left;
-  }
-  .dev-bio {
-    width: 100%;
-    max-width: 40rem;
-  }
-  .dev-bio-button {
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    list-style: none;
-    width: fit-content;
-    margin: 0 auto;
-  }
-  .dev-bio-button::-webkit-details-marker { display: none; }
-
-  .btn-dev {
-    background: linear-gradient(180deg, #60a5fa, #3b82f6);
-    color: #0b2653;
-    border-radius: 999px;
-    box-shadow: 0 1px 2px rgba(11, 38, 83, 0.15), 0 6px 18px rgba(59, 130, 246, 0.35);
-  }
-  .btn-dev:hover {
-    filter: none;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(11, 38, 83, 0.2), 0 10px 24px rgba(59, 130, 246, 0.45);
-  }
-
-  .dev-bio-content {
-    margin-top: 1rem;
-    background: var(--card);
-    border: 1px solid var(--border);
+  /* Popovers ("Om utvecklaren" / "Uppdateringshistorik"), native Popover
+     API, ingen egen JavaScript. Webbläsaren visar/döljer och ritar
+     ::backdrop automatiskt via popovertarget-attributet på knapparna. */
+  [popover] {
+    border: none;
     border-radius: 20px;
-    box-shadow: var(--shadow);
     padding: 1.75rem;
+    max-width: 34rem;
+    width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    color: var(--fg);
   }
-  .dev-bio-content p, .dev-bio-content ul {
+  [popover]::backdrop {
+    background: rgba(10, 15, 10, 0.45);
+    backdrop-filter: blur(4px);
+  }
+  .info-popover h3 {
+    margin: 0 0 1.25rem;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  .info-popover p, .info-popover ul {
     color: var(--fg);
     font-size: 1rem;
     line-height: 1.6;
   }
-  .dev-bio-content ul { padding-left: 1.1rem; }
-  .dev-bio-content li + li { margin-top: 0.35rem; }
-  .dev-bio-content h4 {
+  .info-popover ul { padding-left: 1.1rem; }
+  .info-popover li + li { margin-top: 0.35rem; }
+  .info-popover h4 {
     margin: 1.75rem 0 0.6rem;
     font-size: 1rem;
     font-weight: 700;
     color: var(--brand-dark);
     letter-spacing: -0.01em;
   }
-  .dev-bio-content h4:first-child { margin-top: 0; }
+  .info-popover h4:first-of-type { margin-top: 0; }
 
-  .dev-bio-content .trust-panel {
+  .popover-close {
+    position: sticky;
+    float: right;
+    top: 0;
+    margin: -0.5rem -0.5rem 0 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--muted);
+    padding: 0.4rem;
+  }
+  .popover-close:hover { color: var(--fg); }
+
+  .trust-panel {
     margin: 0.75rem 0 1rem;
     padding: 1.1rem 1.3rem;
     background: var(--brand-bg);
     border-radius: 14px;
   }
-  .dev-bio-content .trust-panel ul {
+  .trust-panel ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .dev-bio-content .trust-panel li {
+  .trust-panel li {
     display: flex;
     align-items: baseline;
     gap: 0.6rem;
   }
-  .dev-bio-content .trust-panel li + li { margin-top: 0.5rem; }
-  .dev-bio-content .trust-panel li::before {
+  .trust-panel li + li { margin-top: 0.5rem; }
+  .trust-panel li::before {
     content: "\2713";
     color: var(--brand-dark);
     font-weight: 700;
     flex-shrink: 0;
   }
 
-  .dev-bio-content .contact-pill {
+  .contact-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -482,7 +511,7 @@
     text-decoration: none;
     margin-top: 0.4rem;
   }
-  .dev-bio-content .contact-pill:hover { text-decoration: underline; }
+  .contact-pill:hover { text-decoration: underline; }
 
   footer {
     margin-top: 3rem;
@@ -533,6 +562,15 @@
           Köp mig en kopp kaffe
         </a>
       </div>
+
+      <div class="cta cta-secondary">
+        <button type="button" class="btn btn-dev" popovertarget="dev-bio-popover">
+          👤 Om utvecklaren
+        </button>
+        <button type="button" class="btn btn-changelog" popovertarget="changelog-popover">
+          📋 Uppdateringshistorik
+        </button>
+      </div>
     </header>
 
     <hr class="divider" />
@@ -568,6 +606,7 @@
           <li>Boplats Syd</li>
           <li>Stena Fastigheter</li>
           <li>Svenska Bostäder</li>
+          <li>Qasa</li>
         </ul>
       </details>
 
@@ -606,77 +645,6 @@
         </p>
       </details>
 
-    </div>
-
-    <hr class="divider" />
-
-    <div class="dev-bio-wrap">
-      <details class="dev-bio">
-        <summary class="btn btn-dev dev-bio-button">👤 Om utvecklaren</summary>
-
-        <div class="dev-bio-content">
-          <h4>Bakgrund</h4>
-          <p>
-            Jag är AddeDev, personen bakom Grannkollen. Jag har jobbat
-            inom IT i över tio år, med tyngdpunkt på drift,
-            infrastruktur och säkerhet:
-          </p>
-          <ul>
-            <li>Byggt och ägt hela infrastrukturlösningar från grunden, inklusive ett eget produktprojekt med trådlös IoT-teknik</li>
-            <li>Infrastructure-as-Code med Ansible och Puppet mot flera virtualiseringsplattformar (VMware, Nutanix, Proxmox)</li>
-            <li>Nätverksadministration, brandväggskonfiguration och säkerhetsövervakning (Zabbix) för hela infrastrukturer</li>
-            <li>CI/CD och Git/GitLab-administration</li>
-            <li>Migrerat produktionssystem mellan operativsystem utan driftstopp</li>
-            <li>Mentorskap för juniora kollegor</li>
-          </ul>
-          <p>
-            Jag har också praktisk erfarenhet av webbutveckling (HTML,
-            JavaScript, PHP, CSS) från tidigare projekt, om än inte i
-            samma djup som mitt huvudspår inom infrastruktur och drift.
-          </p>
-
-          <h4>Varför Grannkollen är byggt som det är</h4>
-          <p>
-            Jag arbetar i grunden inom säkerhetsbranschen, därför är
-            Grannkollen byggd med detta i åtanke:
-          </p>
-          <div class="trust-panel">
-            <ul>
-              <li>Ingen egen server</li>
-              <li>Inga användarkonton</li>
-              <li>Ingen spårning eller analys av dig som person</li>
-              <li>Ingen datainsamling utöver det som är strikt nödvändigt för att visa områdesdata</li>
-            </ul>
-          </div>
-          <p>
-            Tillägget läser bara det som redan är synligt på annonsen
-            du själv valt att besöka, exakt en gång, och skickar det
-            ingenstans utom till de öppna datakällor som krävs för att
-            slå upp området. Du scrapas aldrig som användare. Samma
-            försiktighet jag använder för att skydda infrastruktur i
-            mitt vanliga arbete ligger bakom varje beslut i det här
-            projektet: hellre en enklare produkt som inte samlar in
-            något, än en som gör det "för säkerhets skull".
-          </p>
-
-          <h4>Om AI-verktyg i utvecklingen</h4>
-          <p>
-            Grannkollen byggdes med hjälp av AI-verktyg för att täcka
-            gapet mot mitt huvudspår snabbare, men med samma
-            arbetssätt jag använder i yrkeslivet genom hela processen:
-            verklig testning mot riktiga bostadsannonser, systematisk
-            felsökning tills det faktiskt fungerar, och medvetna
-            tekniska avvägningar.
-          </p>
-
-          <h4>Kontakt</h4>
-          <p>
-            Jag är anonym av personliga skäl, men svarar gärna på
-            frågor om hur produkten fungerar.
-          </p>
-          <a class="contact-pill" href="mailto:info@grannkollen.app">✉️ info@grannkollen.app</a>
-        </div>
-      </details>
     </div>
 
     <hr class="divider" />
@@ -791,6 +759,89 @@
       Grannkollen är inte anslutet till eller sponsrat av Hemnet, Booli
       eller någon annan bostadssajt som nämns ovan.
     </footer>
+  </div>
+
+  <div id="dev-bio-popover" popover class="info-popover">
+    <button type="button" class="popover-close" popovertarget="dev-bio-popover" popovertargetaction="hide" aria-label="Stäng">×</button>
+    <h3>Om utvecklaren</h3>
+
+    <h4>Bakgrund</h4>
+    <p>
+      Jag är AddeDev, personen bakom Grannkollen. Jag har jobbat inom IT i
+      över tio år, med tyngdpunkt på drift, infrastruktur och säkerhet:
+    </p>
+    <ul>
+      <li>Byggt och ägt hela infrastrukturlösningar från grunden, inklusive ett eget produktprojekt med trådlös IoT-teknik</li>
+      <li>Infrastructure-as-Code med Ansible och Puppet mot flera virtualiseringsplattformar (VMware, Nutanix, Proxmox)</li>
+      <li>Nätverksadministration, brandväggskonfiguration och säkerhetsövervakning (Zabbix) för hela infrastrukturer</li>
+      <li>CI/CD och Git/GitLab-administration</li>
+      <li>Migrerat produktionssystem mellan operativsystem utan driftstopp</li>
+      <li>Mentorskap för juniora kollegor</li>
+    </ul>
+    <p>
+      Jag har också praktisk erfarenhet av webbutveckling (HTML,
+      JavaScript, PHP, CSS) från tidigare projekt, om än inte i samma djup
+      som mitt huvudspår inom infrastruktur och drift.
+    </p>
+
+    <h4>Varför Grannkollen är byggt som det är</h4>
+    <p>
+      Jag arbetar i grunden inom säkerhetsbranschen, därför är Grannkollen
+      byggd med detta i åtanke:
+    </p>
+    <div class="trust-panel">
+      <ul>
+        <li>Ingen egen server</li>
+        <li>Inga användarkonton</li>
+        <li>Ingen spårning eller analys av dig som person</li>
+        <li>Ingen datainsamling utöver det som är strikt nödvändigt för att visa områdesdata</li>
+      </ul>
+    </div>
+    <p>
+      Tillägget läser bara det som redan är synligt på annonsen du själv
+      valt att besöka, exakt en gång, och skickar det ingenstans utom till
+      de öppna datakällor som krävs för att slå upp området. Du scrapas
+      aldrig som användare. Samma försiktighet jag använder för att
+      skydda infrastruktur i mitt vanliga arbete ligger bakom varje
+      beslut i det här projektet: hellre en enklare produkt som inte
+      samlar in något, än en som gör det "för säkerhets skull".
+    </p>
+
+    <h4>Om AI-verktyg i utvecklingen</h4>
+    <p>
+      Grannkollen byggdes med hjälp av AI-verktyg för att täcka gapet mot
+      mitt huvudspår snabbare, men med samma arbetssätt jag använder i
+      yrkeslivet genom hela processen: verklig testning mot riktiga
+      bostadsannonser, systematisk felsökning tills det faktiskt
+      fungerar, och medvetna tekniska avvägningar.
+    </p>
+
+    <h4>Kontakt</h4>
+    <p>
+      Jag är anonym av personliga skäl, men svarar gärna på frågor om hur
+      produkten fungerar.
+    </p>
+    <a class="contact-pill" href="mailto:info@grannkollen.app">✉️ info@grannkollen.app</a>
+  </div>
+
+  <div id="changelog-popover" popover class="info-popover">
+    <button type="button" class="popover-close" popovertarget="changelog-popover" popovertargetaction="hide" aria-label="Stäng">×</button>
+    <h3>Uppdateringshistorik</h3>
+    <p><strong>Version 1.0.3:</strong> Stöd för Qasa.</p>
+    <p>
+      <strong>Version 1.0.2:</strong> Rättade fel brottsstatistik för
+      vissa annonser hos Stena Fastigheter, och en bugg där HomeQs
+      sökresultatsida kunde visas som om den vore en riktig annons.
+    </p>
+    <p>
+      <strong>Version 1.0.1:</strong> Förbättrad adressigenkänning på
+      flera bostadssajter. Nytt stöd för Svenska Bostäder.
+    </p>
+    <p>
+      <strong>Version 1.0.0:</strong> Första lanseringen. Stöd för
+      Hemnet, Boneo, Booli, HomeQ, Heimstaden, Landskronahem, Brinova,
+      Victoriahem, Rikshem, Boplats Syd och Stena Fastigheter.
+    </p>
   </div>
 </body>
 </html>
